@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WpfApp_Chimpanzee": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
