@@ -1,0 +1,204 @@
+﻿<Window x:Class="WpfApp_Chimpanzee.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp_Chimpanzee"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Get to know Chimpanzees" Height="1080" Width="1920" WindowState="Maximized">
+
+    <Window.Resources>
+       
+    </Window.Resources>
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="71"/>
+            <RowDefinition Height="379.015"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="403"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Home Title-->
+        <TextBlock Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Explore Topics"  Style="{StaticResource Style_Tbx_TitleWindow}"/>
+
+        <!--Buttons Window:ExploreTopics-->
+        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"  Height="71" Width="190">
+            <Button Name="Btn_BackHome" Height="60" Width="60" Background="AliceBlue" BorderBrush="DimGray" BorderThickness="3,3,2,3" Click="Btn_BackHome_Click" >
+                <StackPanel Orientation="Vertical">
+                    <Image Source="ImageSource\back.png" Height="25" Width="55" VerticalAlignment="Top" Margin="0,6,0,4" />
+                    <TextBlock Text="Go Back" TextWrapping="Wrap" FontSize="12" TextAlignment="Center" Margin="0,0,0,0"/>
+                    <!--<TextBlock Text="(Exit)" TextWrapping="Wrap" FontSize="10" TextAlignment="Center"/>-->
+                </StackPanel>
+            </Button>
+            <Button Name="Btn_Previous" Height="60" Width="60" Background="AliceBlue"  BorderBrush="DimGray" BorderThickness="2,3,2,3" Click="Btn_Previous_Click" >
+                <StackPanel Orientation="Vertical">
+                    <Image Source="ImageSource\left.png" Height="30" Width="40" Margin="0,6,0,0" />
+                    <TextBlock FontSize="12" Text="Previous" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <!--<TextBlock Height="10" Text="Topic" TextWrapping="Wrap"/>-->
+                </StackPanel>
+            </Button>
+            <Button Name="Btn_Next" Height="60" Width="60" Background="AliceBlue"  BorderBrush="DimGray" BorderThickness="2,3,3,3" Click="Btn_Next_Click" >
+                <StackPanel Orientation="Vertical">
+                    <Image Source="ImageSource\right.png" Height="30" Width="40" Margin="0,6,0,0" />
+                    <TextBlock FontSize="12" Text="Next" TextAlignment="Center" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+
+        <!--Categories List & Filter-->
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            <TextBox Name="Tbx_filter"  Height="40" Margin="5,0,0,0" FontSize="24" TextChanged="Tbx_filter_TextChanged"/>
+            <TextBlock Text="Enter text above to filter data!" FontSize="13" Margin="8,0,0,0" />
+            <ListBox Name="LBx_Categories" SelectionChanged="LBx_Categories_SelectionChanged" Height="955" BorderThickness="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  Style="{StaticResource Style_LBx_Categories}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="3,0,0,0">
+                            <TextBlock TextWrapping="Wrap" Height="33">
+                                <Run Text="{Binding categories}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--<Button Height="100" Content="Add" Click="Button_Click"/>-->
+        </StackPanel>
+
+        <!--Detail Block-->
+        <ScrollViewer Name="Scroll_Topics" VerticalScrollBarVisibility="Visible" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+            <StackPanel Orientation="Vertical" DataContext="{Binding ElementName=LBx_Categories,Path=SelectedItem}">
+                <TextBlock Name="TBx_Title" Text="{Binding categories}" TextWrapping="Wrap" Style="{StaticResource Style_TBx_Title}"/>
+                <TextBlock Name="TBx_Description" Text="{Binding description}" TextWrapping="Wrap" Style="{StaticResource Style_TBx_Description}"/>
+                <Image Source="{Binding imagePath}" Height="550" Width="1100" Margin="0,50,0,0" />
+                <TextBlock Name="TBx_ImgDescription" HorizontalAlignment="Center" FontSize="18" Text="{Binding imgdescription}" TextWrapping="Wrap" Margin="0,5,0,20" />
+            </StackPanel>
+
+        </ScrollViewer>
+
+
+
+
+        <!--GRID HOMEPAGE-->
+        <Grid Name="Grid_Home" Visibility="Visible" Background="White" Grid.RowSpan="3" Grid.ColumnSpan="2">
+
+            <StackPanel Orientation="Vertical" >
+                <TextBlock Text="Welcome!" Margin="0,5,0,0" Padding="15,0,0,0" FontSize="52" FontWeight="Normal"  Background="#D6E3F9" />
+                <TextBlock Text="What is a Chimpanzee ?" FontSize="40" TextAlignment="Center" Margin="0,15,0,0" />
+                <TextBlock Text="(Pan troglodytes)" FontSize="22" TextAlignment="Center" FontStyle="Italic" />
+                <TextBlock Name="TBk_Home" Text="" TextWrapping="Wrap"  FontSize="22" TextAlignment="Center" Margin="40,0,40,15" />
+
+
+                <StackPanel  Orientation="Horizontal" Height="510"  Grid.Row="1" Margin="40,0,40,0" Background="#F0F3FB">
+                    <TextBlock  Name="TBk_Home1" Text="" TextWrapping="Wrap" Width="950"  Padding="0,0,0,0" FontSize="18" TextAlignment="Justify" Margin="50,35,0,0"/>
+                    <Image Source="ImageSource\Home1.jpg" Height="450" Width="450" Margin="0,40,900,50" />
+                </StackPanel>
+            </StackPanel>
+            <!--<TextBlock Name="TBk_Home" FontSize="100"/>-->
+
+            <!--Buttons Window:Home-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
+                <Button Name="Btn_Categoies" Height="60" Width="60" Background="AliceBlue"  BorderThickness="3,3,2,3" BorderBrush="DimGray" Click="Btn_Categoies_Click">
+                    <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                        <Image Source="ImageSource\book.png" Height="28" Width="40" Margin="2,5,0,0"/>
+                        <TextBlock Text="Topics" FontSize="12" TextAlignment="Center" Margin="1,0,0,0" TextWrapping="Wrap" Height="20" Width="35"/>
+                    </StackPanel>
+                </Button>
+                <Button Name="Btn_Gallery" Height="60" Width="60" Background="AliceBlue" BorderThickness="2,3,3,3" BorderBrush="DimGray" Click="Btn_Gallery_Click">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="ImageSource\chimp1.png" Height="30" Width="45" Margin="0,7,0,0"/>
+                        <TextBlock Text="Gallery" FontSize="12" TextWrapping="Wrap" TextAlignment="Center" Margin="0,0,0,0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
+
+
+
+        <!--GRID GALLERY-->
+        <Grid Name="Grid_Gallery" Visibility="Hidden" Background="#F0F3FB" Grid.RowSpan="3" Grid.ColumnSpan="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Gallery ARK" Padding="10,5,10,5" FontWeight="Normal" Grid.RowSpan="1" Grid.ColumnSpan="2" FontSize="42" Background="#D6E3F9"/>
+
+
+            <Button Name="Btn_BackHome1" Height="60" Width="60" Background="AliceBlue" BorderBrush="DimGray" BorderThickness="3,3,2,3" Click="Btn_GalleryToHome_Click" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" >
+                <StackPanel Orientation="Vertical">
+                    <Image Source="ImageSource\back.png" Height="25" Width="55" VerticalAlignment="Top" Margin="0,6,0,4" />
+                    <TextBlock Text="Go Back" TextWrapping="Wrap" FontSize="12" TextAlignment="Center" Margin="0,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Height="1000" Width="250" Background="#D6E3F9" >
+
+                <TextBlock Text="Click on Thumbnail to see the Image!" Margin="0,10,0,0" FontSize="1" TextAlignment="Center" />
+                <ListBox Name="LBx_Photos" Width="200" Height="745" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Margin="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="170" Height="100" Margin="0,0,0,0" HorizontalAlignment="Center" Stretch="UniformToFill" Source="{Binding imagePath}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox> 
+            </StackPanel>
+
+            <StackPanel DataContext="{Binding ElementName=LBx_Photos, Path=SelectedItem}"  Margin="0,3,0,0" Grid.Row="1" Grid.Column="1">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="900" Height="828" >
+
+                    <StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="1" Margin="150,85,0,0" >
+                        <Button Name="Btn_pre_img" Width="40" Height="80" Content="&lt;" Click="Btn_pre_img_Click" BorderThickness="3,3,0,3" BorderBrush="Black" Background="#D6E3F9"/>
+
+                        <Border BorderBrush="Black" BorderThickness="2" >
+                            <Image Width="600" Height="450" Source="{Binding imagePath}" Margin="0,5,0,5" />
+                        </Border>
+                        <Button Name="Btn_next_img" Width="40" Height="80" Content="&gt;" Click="Btn_next_img_Click" BorderThickness="0,3,3,3" BorderBrush="Black" Background="#D6E3F9"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Background="#D6E3F9"  Height="150" Width="720" Margin="95,10,13,0" >
+                        <TextBlock Text="Image Description" TextAlignment="Center" FontSize="26" Margin="0,10,0,10"/>
+                        <TextBlock  TextAlignment="Center" Margin="20,0,20,0"  Foreground="Black" TextWrapping="Wrap">
+                            <Run Text="{Binding descriprion}" FontSize="15" FontWeight="DemiBold" />
+                        </TextBlock>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+
+            
+
+            <!--<Button VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="0" Content="ADD" Click="Button_Click1"/>-->
+
+        </Grid>
+
+
+        
+        
+        
+        
+        
+    </Grid>
+
+
+
+
+</Window>
